@@ -1,0 +1,33 @@
+================================================================================
+POWER BI DAX FORMULAS: CAPITAL PROJECT CONTROLS & EVM DASHBOARD
+================================================================================
+
+1. Total Budget at Completion (BAC in USD)
+   Budget at Completion (BAC) = 
+   SUM('capital_project_evm_data'[planned_value_usd])
+
+2. Total Earned Value (EV in USD)
+   Earned Value (EV) = 
+   SUM('capital_project_evm_data'[earned_value_usd])
+
+3. Total Actual Cost (AC in USD)
+   Actual Cost (AC) = 
+   SUM('capital_project_evm_data'[actual_cost_usd])
+
+4. Cost Performance Index (CPI)
+   Cost Performance Index (CPI) = 
+   DIVIDE([Earned Value (EV)], [Actual Cost (AC)], 0)
+
+5. Cost Variance (CV in USD)
+   Cost Variance (CV) = 
+   [Earned Value (EV)] - [Actual Cost (AC)]
+
+6. Estimate at Completion (EAC)
+   Estimate at Completion (EAC) = 
+   DIVIDE([Budget at Completion (BAC)], [Cost Performance Index (CPI)], [Budget at Completion (BAC)])
+
+7. Schedule Health Indicator
+   Schedule Health Flag = 
+   IF([Cost Performance Index (CPI)] >= 1.0, "Optimal Budget", 
+      IF([Cost Performance Index (CPI)] >= 0.95, "Within Tolerance", "Cost Overrun Risk"))
+================================================================================
